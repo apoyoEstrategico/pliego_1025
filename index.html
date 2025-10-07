@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pliego SINDESENA – Mapa interactivo</title>
+  <style>
+    :root{
+      --tap: 44px; /* tamaño mínimo recomendado de objetivo táctil */
+    }
+    html,body{margin:0;padding:0;background:#0b1215;color:#0e1111;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial,sans-serif}
+    header{padding:16px 20px;text-align:center;background:#0f172a;color:#fff;position:sticky;top:0;z-index:5}
+    header h1{font-size:clamp(18px,2.6vw,22px);margin:0}
+    main{max-width:900px;margin:0 auto;padding:18px}
+    figure{margin:0}
+    .img-wrap{position:relative;display:block;width:100%;}
+    /* Leyenda accesible (útil también si el usuario prefiere tocar botones) */
+    .legend{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+    .legend a{display:flex;align-items:center;gap:10px;text-decoration:none;background:#111827;color:#e5e7eb;padding:12px 14px;border:1px solid #374151;border-radius:14px}
+    .legend a span.badge{min-width:28px;min-height:28px;border-radius:999px;display:inline-grid;place-items:center;background:#22c55e;color:#0a0a0a;font-weight:700}
+    .legend a:active{transform:scale(.98)}
+    .tip{font-size:13px;color:#a3a3a3;margin-top:8px}
+    /* Estilos y animación de los hotspots */
+    .hotspot{cursor:pointer}
+    .hotspot circle{fill:rgba(34,197,94,.0);stroke:#22c55e;stroke-width:2}
+    .hotspot:focus circle,.hotspot:hover circle{fill:rgba(34,197,94,.18)}
+    /* Aumentar área táctil invisiblemente para móviles */
+    .hotspot circle{r:18}
+    @media (min-width:720px){.hotspot circle{r:14}}
+    footer{color:#9ca3af;text-align:center;padding:32px 16px}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pliego SINDESENA – Regional Valle 2025</h1>
+  </header>
+
+  <main>
+    <p class="tip">Toca cualquiera de los puntos sobre la imagen o usa los botones de la lista para abrir el PDF correspondiente.</p>
+    <figure>
+      <!--
+        ▼ Reemplaza "mapa.png" por el nombre real del archivo de tu imagen.
+        Mantén la proporción original. El SVG con viewBox hace que los hotspots
+        permanezcan en su posición sin importar el tamaño de la pantalla.
+      -->
+      <svg class="img-wrap" viewBox="0 0 1026 768" role="img" aria-labelledby="title desc">
+        <title id="title">Mapa interactivo de 8 puntos del Pliego SINDESENA</title>
+        <desc id="desc">Toca un punto para abrir el PDF del tema seleccionado.</desc>
+        <image href="mapa.png" x="0" y="0" width="1026" height="768" preserveAspectRatio="xMidYMid slice" />
+
+        <!-- 
+          HOTSPOTS
+          Notas:
+          - Cada <a> envuelve un <circle> que funciona como objetivo táctil.
+          - Cambia el atributo xlink:href de cada <a> para apuntar a tu PDF real.
+          - Puedes ajustar las coordenadas cx/cy para colocar el punto con precisión.
+          - Para moverlos: piensa que (0,0) es la esquina superior izquierda del SVG
+            y (1026,768) la esquina inferior derecha.
+        -->
+        <!-- 1. EJECUCIÓN DE LA FORMACIÓN PROFESIONAL (arriba-derecha) -->
+        <a class="hotspot" xlink:href="pdf/1-formacion-profesional.pdf" target="_blank" aria-label="1. Ejecución de la formación profesional">
+          <circle cx="760" cy="80" />
+        </a>
+        <!-- 2. EJECUCIÓN PRESUPUESTAL (derecha) -->
+        <a class="hotspot" xlink:href="pdf/2-ejecucion-presupuestal.pdf" target="_blank" aria-label="2. Ejecución presupuestal">
+          <circle cx="825" cy="255" />
+        </a>
+        <!-- 3. BIENESTAR Y ASUNTOS DE LOS APRENDICES (abajo-derecha) -->
+        <a class="hotspot" xlink:href="pdf/3-bienestar-aprendices.pdf" target="_blank" aria-label="3. Bienestar y asuntos de los aprendices">
+          <circle cx="815" cy="455" />
+        </a>
+        <!-- 4. INFRAESTRUCTURA (abajo) -->
+        <a class="hotspot" xlink:href="pdf/4-infraestructura.pdf" target="_blank" aria-label="4. Infraestructura">
+          <circle cx="650" cy="620" />
+        </a>
+        <!-- 5. TALENTO HUMANO (abajo-izquierda) -->
+        <a class="hotspot" xlink:href="pdf/5-talento-humano.pdf" target="_blank" aria-label="5. Talento humano">
+          <circle cx="360" cy="650" />
+        </a>
+        <!-- 6. GARANTÍAS SINDICALES (izquierda) -->
+        <a class="hotspot" xlink:href="pdf/6-garantias-sindicales.pdf" target="_blank" aria-label="6. Garantías sindicales">
+          <circle cx="205" cy="480" />
+        </a>
+        <!-- 7. CONDICIONES DIGNAS PARA LOS ANIMALES (arriba-izquierda) -->
+        <a class="hotspot" xlink:href="pdf/7-condiciones-animales.pdf" target="_blank" aria-label="7. Condiciones dignas para los animales">
+          <circle cx="210" cy="305" />
+        </a>
+        <!-- 8. GASTOS DE DESPLAZAMIENTO (arriba) -->
+        <a class="hotspot" xlink:href="pdf/8-gastos-desplazamiento.pdf" target="_blank" aria-label="8. Gastos de desplazamiento">
+          <circle cx="350" cy="85" />
+        </a>
+      </svg>
+    </figure>
+
+    <!-- Leyenda accesible / botones táctiles grandes -->
+    <nav class="legend" aria-label="Accesos directos a los 8 puntos">
+      <a href="pdf/1-formacion-profesional.pdf" target="_blank"><span class="badge">1</span><strong>Ejecución de la formación profesional</strong></a>
+      <a href="pdf/2-ejecucion-presupuestal.pdf" target="_blank"><span class="badge">2</span><strong>Ejecución presupuestal</strong></a>
+      <a href="pdf/3-bienestar-aprendices.pdf" target="_blank"><span class="badge">3</span><strong>Bienestar y asuntos de los aprendices</strong></a>
+      <a href="pdf/4-infraestructura.pdf" target="_blank"><span class="badge">4</span><strong>Infraestructura</strong></a>
+      <a href="pdf/5-talento-humano.pdf" target="_blank"><span class="badge">5</span><strong>Talento humano</strong></a>
+      <a href="pdf/6-garantias-sindicales.pdf" target="_blank"><span class="badge">6</span><strong>Garantías sindicales</strong></a>
+      <a href="pdf/7-condiciones-animales.pdf" target="_blank"><span class="badge">7</span><strong>Condiciones dignas para los animales</strong></a>
+      <a href="pdf/8-gastos-desplazamiento.pdf" target="_blank"><span class="badge">8</span><strong>Gastos de desplazamiento</strong></a>
+    </nav>
+
+    <p class="tip">Sugerencia: en iPhone, un toque abre el PDF; un toque prolongado permite compartir o guardar. En Android, funciona de forma similar.</p>
+  </main>
+
+  <footer>
+    <small>© 2025 SINDESENA – Prototipo educativo. Este sitio es estático y funciona 100% offline una vez cargado, siempre que los PDF estén en la misma carpeta <code>/pdf/</code>.</small>
+  </footer>
+</body>
+</html>
