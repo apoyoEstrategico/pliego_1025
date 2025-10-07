@@ -56,15 +56,7 @@
         <desc id="desc">Toca un punto para abrir el PDF del tema seleccionado.</desc>
         <image href="mapa.png" x="0" y="0" width="1026" height="768" preserveAspectRatio="xMidYMid slice" />
 
-        <!-- 
-          HOTSPOTS
-          Notas:
-          - Cada <a> envuelve un <circle> que funciona como objetivo táctil.
-          - Cambia el atributo href de cada <a> para apuntar a tu PDF real.
-          - Puedes ajustar las coordenadas cx/cy para colocar el punto con precisión.
-          - Para moverlos: piensa que (0,0) es la esquina superior izquierda del SVG
-            y (1026,768) la esquina inferior derecha.
-        -->
+        <!-- HOTSPOTS -->
         <!-- 1. EJECUCIÓN DE LA FORMACIÓN PROFESIONAL (arriba-derecha) -->
         <a class="hotspot" href="pdf/1-formacion-profesional.pdf" target="_blank" rel="noopener" aria-label="1. Ejecución de la formación profesional">
           <circle cx="760" cy="80" />
@@ -118,12 +110,13 @@
     <section id="videos" class="videos">
       <h2>Videos</h2>
       <div id="videoGrid" class="videos-grid" aria-live="polite"></div>
-      
+      <p class="tip">Pon tus MP4 en <code>Videos/</code> (respeta mayúsculas). Formato recomendado: H.264 + AAC, sin tildes ni espacios en el nombre.</p>
       <noscript>
         <p>Tu navegador tiene desactivado JavaScript. Puedes abrir los videos directamente:</p>
         <ul>
           <li><a href="Videos/1-formacion-profesional.mp4">1-formacion-profesional.mp4</a></li>
           <li><a href="Videos/2-ejecucion-presupuestal.mp4">2-ejecucion-presupuestal.mp4</a></li>
+          <li><a href="Videos/3-bienestar-aprendices.mp4">3-bienestar-aprendices.mp4</a></li>
         </ul>
       </noscript>
     </section>
@@ -137,7 +130,8 @@
     // Lista de videos (ajusta títulos y rutas). Deben existir en /Videos/ (respetar mayúscula)
     const VIDEOS = [
       { src: 'Videos/1-formacion-profesional.mp4', title: 'Ejecución de la FPI' },
-      { src: 'Videos/2-ejecucion-presupuestal.mp4', title: 'Ejecución presupuestal' }
+      { src: 'Videos/2-ejecucion-presupuestal.mp4', title: 'Ejecución presupuestal' },
+      { src: 'Videos/3-bienestar-aprendices.mp4', title: 'Bienestar y asuntos de aprendices' }
     ];
 
     const grid = document.getElementById('videoGrid');
@@ -149,7 +143,7 @@
         video.setAttribute('controls','');
         video.setAttribute('preload','metadata');
         video.setAttribute('playsinline',''); // evita fullscreen forzado en iOS
-        // Si deseas miniatura: video.setAttribute('poster','posters/1-formacion-profesional.jpg');
+        // Si deseas miniatura: video.setAttribute('poster','posters/archivo.jpg');
 
         const src = document.createElement('source');
         src.src = v.src;
