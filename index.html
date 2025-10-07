@@ -108,7 +108,38 @@
   </main>
 
   <footer>
-    <small>© 2025 SINDESENA<code>/pdf/</code>.</small>
+    <small>© 2025 SINDESENA</small>
   </footer>
+<script>
+// Lista de videos (ajusta títulos y rutas). Deben existir en /Videos/ (respetar mayúscula)
+const VIDEOS = [
+{ src: 'Videos/1-formacion-profesional.mp4', title: 'Ejecucuión de la FPI' },
+{ src: 'Videos/2-ejecucion-presupuestal.mp4', title: 'Ejecución presupuestal' },
+
+// Agrega más entradas según sea necesario
+];
+
+
+const grid = document.getElementById('videoGrid');
+if (grid && Array.isArray(VIDEOS)) {
+for (const v of VIDEOS) {
+const fig = document.createElement('figure');
+const video = document.createElement('video');
+video.setAttribute('controls','');
+video.setAttribute('preload','metadata');
+video.setAttribute('playsinline',''); // evita fullscreen forzado en iOS
+const src = document.createElement('source');
+src.src = v.src;
+src.type = 'video/mp4';
+video.appendChild(src);
+const cap = document.createElement('figcaption');
+cap.className = 'cap';
+cap.textContent = v.title || v.src.split('/').pop();
+fig.appendChild(video);
+fig.appendChild(cap);
+grid.appendChild(fig);
+}
+}
+</script>
 </body>
 </html>
