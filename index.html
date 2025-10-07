@@ -1,37 +1,4 @@
-const grid = document.getElementById('videoGrid');
-    function makeWarnCard(v, status){
-      const fig = document.createElement('figure');
-      const box = document.createElement('div');
-      box.style.padding = '14px';
-      box.style.color = '#e5e7eb';
-      box.innerHTML = `⚠️ No se pudo cargar <code>${v.src}</code>${status?` (HTTP ${status})`:''}. <br>Verifica el nombre, mayúsculas/minúsculas y tildes. Prueba este enlace directo: <a href="${v.src}" target="_blank">abrir archivo</a>.`;
-      const cap = document.createElement('figcaption');
-      cap.className = 'cap';
-      cap.textContent = v.title || v.src.split('/').pop();
-      fig.appendChild(box); fig.appendChild(cap); grid.appendChild(fig);
-    }
-    async function addCard(v){
-      try{
-        const res = await fetch(v.src, { method:'HEAD', cache:'no-store' });
-        if(!res.ok){ makeWarnCard(v, res.status); return; }
-        const fig = document.createElement('figure');
-        const video = document.createElement('video');
-        video.setAttribute('controls','');
-        video.setAttribute('preload','metadata');
-        video.setAttribute('playsinline',''); // evita fullscreen forzado en iOS
-        const src = document.createElement('source');
-        src.src = v.src;
-        src.type = 'video/mp4';
-        video.appendChild(src);
-        const cap = document.createElement('figcaption');
-        cap.className = 'cap';
-        cap.textContent = v.title || v.src.split('/').pop();
-        fig.appendChild(video); fig.appendChild(cap); grid.appendChild(fig);
-      }catch(err){ makeWarnCard(v); }
-    }
-    if (grid && Array.isArray(VIDEOS)) {
-      VIDEOS.forEach(addCard);
-    }<!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -61,13 +28,6 @@ const grid = document.getElementById('videoGrid');
     .hotspot circle{r:18}
     @media (min-width:720px){.hotspot circle{r:14}}
     footer{color:#9ca3af;text-align:center;padding:32px 16px}
-      /* ==== Sección de videos ==== */
-    .videos{margin-top:26px}
-    .videos h2{font-size:clamp(18px,2.4vw,22px);margin:6px 0 14px}
-    .videos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-    .videos-grid figure{margin:0;background:#0f172a;border:1px solid #1f2937;border-radius:14px;overflow:hidden}
-    .videos-grid .cap{padding:10px 12px;color:#e5e7eb;font-size:14px;border-top:1px solid #1f2937}
-    .videos-grid video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
   </style>
 </head>
 <body>
@@ -145,11 +105,6 @@ const grid = document.getElementById('videoGrid');
     </nav>
 
     <p class="tip">Sugerencia: en iPhone, un toque abre el PDF; un toque prolongado permite compartir o guardar. En Android, funciona de forma similar.</p>
-      <section id="videos" class="videos">
-      <h2>Videos</h2>
-      <div id="videoGrid" class="videos-grid" aria-live="polite"></div>
-      <p class="tip">Consejo: mantén los archivos MP4 en la carpeta <code>Videos/</code>. Para mejor desempeño, usa compresión H.264 y <em>preload=\"metadata\"</em>.</p>
-    </section>
   </main>
 
   <footer>
